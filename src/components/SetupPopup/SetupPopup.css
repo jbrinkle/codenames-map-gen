@@ -1,0 +1,24 @@
+.spacerTB {
+    margin-bottom: 20px;
+}
+
+.spacerTB > table {
+    border: 1px solid black;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.spacerTB > table td:nth-child(1) {
+    width: 30px;
+}
+.spacerTB > table td:nth-child(2) {
+    text-align: left;
+}
+.spacerTB > table td:nth-child(3) {
+    width: 15%
+}
+
+.spacerLR {
+    margin-left: 15px;
+    margin-right: 15px;
+}

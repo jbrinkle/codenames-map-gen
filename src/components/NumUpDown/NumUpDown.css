@@ -1,0 +1,39 @@
+.numUpDown {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.numUpDown button {
+    margin: 2px;
+    width: 46px;
+    height: 46px;
+    border-radius: 23px;
+    background-color: #D8A;
+}
+
+.numUpDown button:focus {
+    outline: none;
+    background-color: #C79;
+}
+
+.numUpDown .settingDisplay {
+    width: 50%;
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.numUpDown .settingName {
+    font-size: .5em;
+    text-transform: uppercase;
+    margin: -2px;
+}
+
+.numUpDown .settingValue {
+    font-size: 2em;
+    margin: -2px;
+}

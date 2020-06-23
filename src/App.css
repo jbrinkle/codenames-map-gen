@@ -1,0 +1,103 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.mapgridHost {
+  margin: 0 auto;
+  width: 80%;
+  max-width: 500px;
+  background-color: #DDD;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 2px solid #555;
+}
+
+.App > header.appHeader {
+  height: 50px;
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto;
+  background-image: url(./assets/header_bg.png);
+  background-position: left center;
+  background-size: auto 50px;
+  background-repeat: no-repeat;
+}
+
+.App > header.appHeader h1 {
+  margin-top: 10px;
+}
+.App > header.appHeader h1 div {
+  position: relative;
+  text-align: right;
+  letter-spacing: .3em;
+  color: #EEE;
+}
+.App > header.appHeader h1 div.line1 {
+  font-size: .7em;
+}
+.App > header.appHeader h1 div.line2 {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: .5em;
+}
+
+@media screen and (max-width: 475px) {
+  .App > header.appHeader h1 div.line1 {
+    font-size: .55em;
+  }
+  .App > header.appHeader h1 div.line2 {
+    font-size: .4em;
+  }
+}
+
+div.commands {
+  margin-top: 25px;
+}
+
+div.commands > button {
+  background-color: #D8A;
+  border: 1.5px solid #C79;
+  border-radius: 2px;
+  font-size: 1em;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+div.commands > button:focus {
+    background-color: #C79;
+    outline: none;
+}

@@ -1,0 +1,43 @@
+.toggle {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.toggle button {
+    margin: 2px;
+    width: 75px;
+    height: 46px;
+    border: 0;
+    background-color: transparent;
+    flex: auto auto;
+}
+
+.toggle button:focus {
+    outline: none;
+}
+
+.toggleIndicator {
+    fill: #D8A;
+}
+.toggleIndicatorActive {
+    fill: #C79;
+}
+
+.toggle .settingDisplay {
+    height: 50px;
+    display: flex;
+    flex-direction: column;
+    flex: 2 2;
+    align-items: center;
+    justify-content: center;
+}
+
+.toggle .settingName {
+    text-transform: uppercase;
+}
+
+.toggle .settingSubtext {
+    font-size: .7em;
+}
