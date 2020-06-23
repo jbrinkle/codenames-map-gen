@@ -20,7 +20,14 @@ class MapGrid extends React.Component {
     }
   }
   render() {
-    const { rowCount, data, config } = this.props;
+    let { rowCount, data, config } = this.props;
+
+    if (!data.length) {
+      data = Array.from(Array(25).keys()).map(v => 'a');
+      config = { 'assassin': 'none' }
+      rowCount = 5;
+    }
+
     const colCount = data.length / rowCount;
     const isValidData = data.length % rowCount === 0;
 
@@ -34,7 +41,7 @@ class MapGrid extends React.Component {
         data.map((cellData, index) => {
           const teamName = this.getTeamName(cellData);
           const teamIcon = config[teamName] || teamName;
-          console.log(teamIcon);
+          console.log(`Data index=${index}, value=${cellData}, teamName=${teamName}, icon=${teamIcon}`);
 
           const ci = index % colCount + 1;
           const ri = Math.floor(index / colCount) + 1;

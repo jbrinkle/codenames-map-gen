@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import './components/MapGrid/MapGridCell/MapGridCell'
 import MapGrid from './components/MapGrid/MapGrid';
@@ -9,11 +8,12 @@ function App() {
     team1: 'square',
     team2: 'circle'
   }
-  const mapData = [ 'a', 'b', '1', '2', '1',
-                    'b', 'b', '1', '2', '1',
-                    'b', '1', '2', '1', 'b',
-                    '1', '2', 'b', '1', '2',
-                    '1', 'b', '1', '2', 'b' ]
+  const mapData = []
+                  // [ 'a', 'b', '1', '2', '1',
+                  //   'b', 'b', '1', '2', '1',
+                  //   'b', '1', '2', '1', 'b',
+                  //   '1', '2', 'b', '1', '2',
+                  //   '1', 'b', '1', '2', 'b' ]
 
 
   return (
