@@ -36,3 +36,13 @@
     transform: rotate(360deg);
   }
 }
+
+.mapgridHost {
+  margin: 0 auto;
+  width: 80%;
+  max-width: 500px;
+  background-color: #DDD;
+  padding: 10px;
+  box-sizing: border-box;
+  border: 2px solid #555;
+}
