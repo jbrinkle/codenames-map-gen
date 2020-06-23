@@ -2,18 +2,15 @@ import React from 'react';
 import './App.css';
 import './components/MapGrid/MapGridCell/MapGridCell'
 import MapGrid from './components/MapGrid/MapGrid';
-import NumUpDown from './components/NumUpDown/NumUpDown';
-import Toggle from './components/Toggle/Toggle';
-import Popup from './components/Popup/Popup';
+import SetupPopup from './components/SetupPopup/SetupPopup';
 
 class App extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      myNum: 8,
-      teamCount: 2,
-      showPopup: false
+      showPopup: false,
+      mapData: []
     };
   }
 
@@ -24,7 +21,8 @@ class App extends React.Component {
     })
   }
 
-  closePopup(isCancelled) {
+  setupPopupClosed(setupState) {
+    console.log(setupState);
     this.setState({
       ...this.state,
       showPopup: false
@@ -32,36 +30,14 @@ class App extends React.Component {
   }
 
   render() {
-    // const teamConfig = {
-    //   team1: 'square',
-    //   team2: 'circle'
-    // }
-    const mapData = []
-                    // [ 'a', 'b', '1', '2', '1',
-                    //   'b', 'b', '1', '2', '1',
-                    //   'b', '1', '2', '1', 'b',
-                    //   '1', '2', 'b', '1', '2',
-                    //   '1', 'b', '1', '2', 'b' ]
-
-    const setMyNumHandler = (newValue) => {
-      this.setState({
-        ...this.state,
-        myNum: newValue
-      });
-    }
-
-    const toggleTeamCount = (newTeamCount) => {
-      console.log(`Setting teamcount to ${newTeamCount}`);
-      this.setState({
-        ...this.state,
-        teamCount: newTeamCount
-      })
-    }
-
     return (
       <div className="App">
+        <header className="appHeader">
+          <img className="logo" src="" alt="placeholder for logo"/>
+        </header>
         { this.state.showPopup && 
-          <Popup onClose={this.closePopup.bind(this)} title={'New...'} successLabel={'Generate'} />
+          // <Popup onClose={this.closePopup.bind(this)} title={'New...'} successLabel={'Generate'} />
+          <SetupPopup onClose={this.setupPopupClosed.bind(this)} />
         }
         <div className="mapgridHost">
           {/* <Toggle left={'1-Team'} leftDesc={'2-player "Duet" mode'}
@@ -70,23 +46,14 @@ class App extends React.Component {
                   setValue={toggleTeamCount}
                   />
           <NumUpDown setValue={setMyNumHandler} label={'setting'} value={this.state.myNum} /> */}
-          <button onClick={() => this.showPopup()}>Popup!</button>
-          <MapGrid data={mapData} />
+          <MapGrid data={this.state.mapData} />
         </div>
-        {/* <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header> */}
+        
+        <div className="commands">
+          <button className="ok" onClick={() => this.showPopup()}>
+            New Map...
+          </button>
+        </div>
       </div>
     );
   }

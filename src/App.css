@@ -46,3 +46,25 @@
   box-sizing: border-box;
   border: 2px solid #555;
 }
+
+.App > header.appHeader {
+  height: 50px;
+}
+
+div.commands {
+  margin-top: 25px;
+}
+
+div.commands > button {
+  background-color: #D8A;
+  border: 1.5px solid #C79;
+  border-radius: 2px;
+  font-size: 1em;
+  padding: 8px;
+  box-sizing: border-box;
+}
+
+div.commands > button:focus {
+    background-color: #C79;
+    outline: none;
+}

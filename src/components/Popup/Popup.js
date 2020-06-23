@@ -8,17 +8,44 @@ class Popup extends React.Component {
     - successLabel <string>: caption on the Ok! button
     - onClose <func>: sends an indicator of whether the dialog was cancelled
   */
+  state = {
+    closing: false
+  }
+
+  static FadeIn = {
+    animationName: 'fadein',
+    animationDuration: '.5s',
+    animationFillMode: 'forwards'
+  }
+  static FadeOut = {
+    animationName: 'fadeout',
+    animationDuration: '.5s',
+    animationFillMode: 'forwards'
+  }
+  static SlideIn = {
+    animationName: 'slidein',
+    animationDuration: '.5s',
+    animationFillMode: 'forwards'
+  }
+  static SlideOut = {
+    animationName: 'slideout',
+    animationDuration: '.5s',
+    animationFillMode: 'forwards'
+  }
+
   cancel() {
-    this.props.onClose(true);
+    this.setState({closing: true})
+    setTimeout(() => this.props.onClose(true), 500);
   }
 
   ok() {
-    this.props.onClose(false);
+    this.setState({closing: true})
+    setTimeout(() => this.props.onClose(false), 500);
   }
 
   render() {
-    return <div className="popupFullScreen">
-      <div className="popup">
+    return <div className="popupFullScreen" style={this.state.closing ? Popup.FadeOut : Popup.FadeIn}>
+      <div className="popup" style={this.state.closing ? Popup.SlideOut : Popup.SlideIn}>
         <header>
           <div className="title">{this.props.title}</div>
           <button className="cancel" onClick={() => this.cancel()}>

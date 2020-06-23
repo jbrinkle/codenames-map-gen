@@ -8,8 +8,8 @@
     right: 0;
     margin: 0;
     background-color: rgba(0,0,0,.5);
-    animation: fadein .5s;
-    animation-fill-mode: forwards;
+    /* animation: fadein .5s;
+    animation-fill-mode: forwards; */
 }
 
 @keyframes fadein {
@@ -21,10 +21,20 @@
     }
 }
 
+@keyframes fadeout {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
 .popupFullScreen .popup {
     margin: 50px auto;
     width: 50%;
     max-width: 500px;
+    max-height: 85%;
     border: 1px solid #555;
     background-color: #EEE;
     border-radius: 5px;
@@ -38,6 +48,15 @@
     }
     100% {
         margin-top: 50px;
+    }
+}
+
+@keyframes slideout {
+    0% {
+        margin-top: 50px;
+    }
+    100% {
+        margin-top: 150px;
     }
 }
 
@@ -70,6 +89,9 @@
 
 .popup .content {
     min-height: 200px;
+    margin: 0 16px;
+    padding: 0;
+    overflow: auto;
 }
 
 .popup .commandFooter {
