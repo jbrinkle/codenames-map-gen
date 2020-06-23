@@ -3,13 +3,15 @@ import './App.css';
 import './components/MapGrid/MapGridCell/MapGridCell'
 import MapGrid from './components/MapGrid/MapGrid';
 import NumUpDown from './components/NumUpDown/NumUpDown';
+import Toggle from './components/Toggle/Toggle';
 
 class App extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      myNum: 8
+      myNum: 8,
+      teamCount: 2
     };
   }
 
@@ -28,13 +30,27 @@ class App extends React.Component {
 
     const setMyNumHandler = (newValue) => {
       this.setState({
+        ...this.state,
         myNum: newValue
       });
+    }
+
+    const toggleTeamCount = (newTeamCount) => {
+      console.log(`Setting teamcount to ${newTeamCount}`);
+      this.setState({
+        ...this.state,
+        teamCount: newTeamCount
+      })
     }
 
     return (
       <div className="App">
         <div className="mapgridHost">
+          <Toggle left={'1-Team'} leftDesc={'2-player "Duet" mode'}
+                  right={'2-Team'} rightDesc={'Traditional mode for 4+ players'}
+                  value={this.state.teamCount}
+                  setValue={toggleTeamCount}
+                  />
           <NumUpDown setValue={setMyNumHandler} label={'setting'} value={this.state.myNum} />
           <MapGrid data={mapData} />
         </div>

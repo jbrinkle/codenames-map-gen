@@ -5,7 +5,7 @@
     justify-content: space-between;
 }
 
-button {
+.numUpDown button {
     margin: 2px;
     width: 46px;
     height: 46px;
@@ -13,20 +13,27 @@ button {
     background-color: #D8A;
 }
 
-.settingDisplay {
+.numUpDown button:focus {
+    outline: none;
+    background-color: #C79;
+}
+
+.numUpDown .settingDisplay {
     width: 50%;
     height: 50px;
-    border: 1px solid #888;
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 }
 
-.settingName {
+.numUpDown .settingName {
     font-size: .5em;
     text-transform: uppercase;
+    margin: -2px;
 }
 
-.settingValue {
+.numUpDown .settingValue {
     font-size: 2em;
+    margin: -2px;
 }
