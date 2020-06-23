@@ -33,7 +33,10 @@ class App extends React.Component {
     return (
       <div className="App">
         <header className="appHeader">
-          <img className="logo" src="" alt="placeholder for logo"/>
+          <h1>
+            <div className="line1">CODENAMES</div>
+            <div className="line2">Map Generator</div>
+          </h1>
         </header>
         { this.state.showPopup && 
           <SetupPopup onClose={this.setupPopupClosed.bind(this)} />

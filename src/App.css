@@ -49,6 +49,39 @@
 
 .App > header.appHeader {
   height: 50px;
+  width: 80%;
+  max-width: 500px;
+  margin: 0 auto;
+  background-image: url(./assets/header_bg.png);
+  background-position: left center;
+  background-size: auto 50px;
+  background-repeat: no-repeat;
+}
+
+.App > header.appHeader h1 {
+  margin-top: 10px;
+}
+.App > header.appHeader h1 div {
+  position: relative;
+  text-align: right;
+  letter-spacing: .3em;
+  color: #EEE;
+}
+.App > header.appHeader h1 div.line1 {
+  font-size: .7em;
+}
+.App > header.appHeader h1 div.line2 {
+  font-family: 'Courier New', Courier, monospace;
+  font-size: .5em;
+}
+
+@media screen and (max-width: 475px) {
+  .App > header.appHeader h1 div.line1 {
+    font-size: .55em;
+  }
+  .App > header.appHeader h1 div.line2 {
+    font-size: .4em;
+  }
 }
 
 div.commands {

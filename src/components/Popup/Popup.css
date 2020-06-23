@@ -29,7 +29,7 @@
 }
 
 .popupFullScreen .popup {
-    margin: 50px auto;
+    margin: 60px auto;
     position: relative;
     width: 50%;
     max-width: 500px;
@@ -53,13 +53,13 @@
         margin-top: 150px;
     }
     100% {
-        margin-top: 50px;
+        margin-top: 60px;
     }
 }
 
 @keyframes slideout {
     0% {
-        margin-top: 50px;
+        margin-top: 60px;
     }
     100% {
         margin-top: 150px;
