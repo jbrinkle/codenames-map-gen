@@ -8,8 +8,6 @@
     right: 0;
     margin: 0;
     background-color: rgba(0,0,0,.5);
-    /* animation: fadein .5s;
-    animation-fill-mode: forwards; */
 }
 
 @keyframes fadein {
@@ -32,14 +30,22 @@
 
 .popupFullScreen .popup {
     margin: 50px auto;
+    position: relative;
     width: 50%;
     max-width: 500px;
-    max-height: 85%;
+    height: 85%;
+    max-height: 700px;
     border: 1px solid #555;
     background-color: #EEE;
     border-radius: 5px;
     animation: slidein .5s;
     animation-fill-mode: forwards;
+}
+
+@media screen and (max-width: 900px) {
+    .popupFullScreen .popup {
+        width: 85%;
+    }
 }
 
 @keyframes slidein {
@@ -89,14 +95,18 @@
 
 .popup .content {
     min-height: 200px;
+    max-height: calc(100% - 130px);
     margin: 0 16px;
     padding: 0;
     overflow: auto;
 }
 
 .popup .commandFooter {
-    padding: 10px;
+    padding: 10px 0;
     margin-bottom: 10px;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
 }
 
 .popup .commandFooter button.ok {

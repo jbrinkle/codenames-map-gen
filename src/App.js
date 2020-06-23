@@ -36,16 +36,9 @@ class App extends React.Component {
           <img className="logo" src="" alt="placeholder for logo"/>
         </header>
         { this.state.showPopup && 
-          // <Popup onClose={this.closePopup.bind(this)} title={'New...'} successLabel={'Generate'} />
           <SetupPopup onClose={this.setupPopupClosed.bind(this)} />
         }
         <div className="mapgridHost">
-          {/* <Toggle left={'1-Team'} leftDesc={'2-player "Duet" mode'}
-                  right={'2-Team'} rightDesc={'Traditional mode for 4+ players'}
-                  value={this.state.teamCount}
-                  setValue={toggleTeamCount}
-                  />
-          <NumUpDown setValue={setMyNumHandler} label={'setting'} value={this.state.myNum} /> */}
           <MapGrid data={this.state.mapData} />
         </div>
         
