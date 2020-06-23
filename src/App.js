@@ -19,7 +19,7 @@ function App() {
   return (
     <div className="App">
       <div className="mapgridHost">
-        <MapGrid data={mapData} config={teamConfig} rowCount={5} />
+        <MapGrid data={mapData} />
       </div>
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />

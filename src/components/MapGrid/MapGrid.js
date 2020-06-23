@@ -8,6 +8,7 @@ class MapGrid extends React.Component {
     - rowCount <number>: count of rows in the data
     - data <string[]>: identifiers for each cell ('a' = assassin, 'b' = bystander, '#' = team# )
     - config <object>: keys are teamnames; values are the icon used by the team
+    - firstTurn <string>: identifier for which team goes first
   */
   getTeamName(shorthand) {
     switch (shorthand.toLowerCase()) {
@@ -31,34 +32,43 @@ class MapGrid extends React.Component {
     const colCount = data.length / rowCount;
     const isValidData = data.length % rowCount === 0;
 
-    return <div className="grid">
-      { !isValidData && 
-        <div className="invalidData">
-          Invalid Map Data
+    const firstTurnStyle = {
+      margin: '0 auto',
+      width: '50%'
+    }
+
+    return <React.Fragment>
+        <div className="gridHeader">
+          <MapGridCell cellLocation={firstTurnStyle} teamname={this.props.firstTurn || 'assassin'}/>
         </div>
-      }
-      { isValidData &&
-        data.map((cellData, index) => {
-          const teamName = this.getTeamName(cellData);
-          const teamIcon = config[teamName] || teamName;
-          console.log(`Data index=${index}, value=${cellData}, teamName=${teamName}, icon=${teamIcon}`);
+        <div className="grid">
+        { !isValidData && 
+          <div className="invalidData">
+            Invalid Map Data
+          </div>
+        }
+        { isValidData &&
+          data.map((cellData, index) => {
+            const teamName = this.getTeamName(cellData);
+            const teamIcon = config[teamName] || teamName;
 
-          const ci = index % colCount + 1;
-          const ri = Math.floor(index / colCount) + 1;
-          const nextCellStyle = {
-            gridColumn: `${ci} / ${ci}`,
-            gridRow: `${ri} / ${ri}`
-          }
+            const ci = index % colCount + 1;
+            const ri = Math.floor(index / colCount) + 1;
+            const nextCellStyle = {
+              gridColumn: `${ci} / ${ci}`,
+              gridRow: `${ri} / ${ri}`
+            }
 
-          return <MapGridCell
-            key={`${ri}-${ci}`}
-            cellLocation={nextCellStyle}
-            teamname={teamName}
-            teamicon={teamIcon}
-          />
-        })
-      }
-      </div>
+            return <MapGridCell
+              key={`${ri}-${ci}`}
+              cellLocation={nextCellStyle}
+              teamname={teamName}
+              teamicon={teamIcon}
+            />
+          })
+        }
+        </div>
+      </React.Fragment>
   }
 }
 
