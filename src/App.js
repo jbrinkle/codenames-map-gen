@@ -4,6 +4,7 @@ import './components/MapGrid/MapGridCell/MapGridCell'
 import MapGrid from './components/MapGrid/MapGrid';
 import NumUpDown from './components/NumUpDown/NumUpDown';
 import Toggle from './components/Toggle/Toggle';
+import Popup from './components/Popup/Popup';
 
 class App extends React.Component {
 
@@ -11,10 +12,24 @@ class App extends React.Component {
     super(props);
     this.state = {
       myNum: 8,
-      teamCount: 2
+      teamCount: 2,
+      showPopup: false
     };
   }
 
+  showPopup() {
+    this.setState({
+      ...this.state,
+      showPopup: true
+    })
+  }
+
+  closePopup(isCancelled) {
+    this.setState({
+      ...this.state,
+      showPopup: false
+    })
+  }
 
   render() {
     // const teamConfig = {
@@ -45,13 +60,17 @@ class App extends React.Component {
 
     return (
       <div className="App">
+        { this.state.showPopup && 
+          <Popup onClose={this.closePopup.bind(this)} title={'New...'} successLabel={'Generate'} />
+        }
         <div className="mapgridHost">
-          <Toggle left={'1-Team'} leftDesc={'2-player "Duet" mode'}
+          {/* <Toggle left={'1-Team'} leftDesc={'2-player "Duet" mode'}
                   right={'2-Team'} rightDesc={'Traditional mode for 4+ players'}
                   value={this.state.teamCount}
                   setValue={toggleTeamCount}
                   />
-          <NumUpDown setValue={setMyNumHandler} label={'setting'} value={this.state.myNum} />
+          <NumUpDown setValue={setMyNumHandler} label={'setting'} value={this.state.myNum} /> */}
+          <button onClick={() => this.showPopup()}>Popup!</button>
           <MapGrid data={mapData} />
         </div>
         {/* <header className="App-header">
