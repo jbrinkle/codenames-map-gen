@@ -36,10 +36,13 @@ class MapGrid extends React.Component {
       margin: '0 auto',
       width: '50%'
     }
+    const firstTurn = this.props.firstTurn
+      ? (this.props.firstTurn.length > 1 ? this.props.firstTurn : this.getTeamName(this.props.firstTurn))
+      : 'assassin'
 
     return <React.Fragment>
         <div className="gridHeader">
-          <MapGridCell cellLocation={firstTurnStyle} teamname={this.props.firstTurn || 'assassin'}/>
+          <MapGridCell cellLocation={firstTurnStyle} teamname={firstTurn}/>
         </div>
         <div className="grid">
         { !isValidData && 
