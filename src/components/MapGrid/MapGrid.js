@@ -5,69 +5,73 @@ import MapGridCell from './MapGridCell/MapGridCell';
 class MapGrid extends React.Component {
   /*
     Props:
-    - rowCount <number>: count of rows in the data
-    - data <string[]>: identifiers for each cell ('a' = assassin, 'b' = bystander, '#' = team# )
-    - config <object>: keys are teamnames; values are the icon used by the team
-    - firstTurn <string>: identifier for which team goes first
+    - data <string[][]>: identifiers for each cell ( 'a' = assassin, 'b' = bystander, '#' = team# )
+    - teamData <object>: contains information on number of teams and who is first
   */
-  getTeamName(shorthand) {
-    switch (shorthand.toLowerCase()) {
+
+  defaultConfig() {
+    return {
+      'assassin': 'assassin',
+      'bystander': 'bystander',
+      'team1': 'triangle',
+      'team2': 'circle',
+      'team3': 'square'
+    };
+  }
+
+  getTeamName(shorthand, teamcount) {
+    const teamId = shorthand.toString().toLowerCase();
+    switch (teamId) {
+      case '0':
       case 'a':
         return 'assassin';
       case 'b':
         return 'bystander';
+      case '2':
+        return 'team2';
       default:
-        return 'team' + shorthand;
+        return (teamcount === 2) ? 'team3' : 'team1'
     }
   }
+
   render() {
-    let { rowCount, data, config } = this.props;
+    let { data = [], teamData = { count: 0, first: 0 } } = this.props;
+    let config = this.defaultConfig();
 
     if (!data.length) {
-      data = Array.from(Array(25).keys()).map(v => 'a');
+      data = Array.from(Array(5).keys()).map(r => 
+          Array.from(Array(5).keys()).map(c => 'a')
+        );
       config = { 'assassin': 'none' }
-      rowCount = 5;
     }
-
-    const colCount = data.length / rowCount;
-    const isValidData = data.length % rowCount === 0;
 
     const firstTurnStyle = {
       margin: '0 auto',
       width: '50%'
     }
-    const firstTurn = this.props.firstTurn
-      ? (this.props.firstTurn.length > 1 ? this.props.firstTurn : this.getTeamName(this.props.firstTurn))
-      : 'assassin'
 
     return <React.Fragment>
         <div className="gridHeader">
-          <MapGridCell cellLocation={firstTurnStyle} teamname={firstTurn}/>
+          <MapGridCell cellLocation={firstTurnStyle} teamname={this.getTeamName(teamData.first, teamData.count)}/>
         </div>
         <div className="grid">
-        { !isValidData && 
-          <div className="invalidData">
-            Invalid Map Data
-          </div>
-        }
-        { isValidData &&
-          data.map((cellData, index) => {
-            const teamName = this.getTeamName(cellData);
-            const teamIcon = config[teamName] || teamName;
+        { data.map((rowData, rowIndex) => {
 
-            const ci = index % colCount + 1;
-            const ri = Math.floor(index / colCount) + 1;
-            const nextCellStyle = {
-              gridColumn: `${ci} / ${ci}`,
-              gridRow: `${ri} / ${ri}`
-            }
+            return rowData.map((cellData, colIndex) => {
+              const teamName = this.getTeamName(cellData, teamData.count);
+              const teamIcon = config[teamName] || teamName;
 
-            return <MapGridCell
-              key={`${ri}-${ci}`}
-              cellLocation={nextCellStyle}
-              teamname={teamName}
-              teamicon={teamIcon}
-            />
+              const nextCellStyle = {
+                gridColumn: `${colIndex + 1} / ${colIndex + 1}`,
+                gridRow: `${rowIndex + 1} / ${rowIndex + 1}`
+              }
+
+              return <MapGridCell
+                key={`${rowIndex + 1}-${colIndex + 1}`}
+                cellLocation={nextCellStyle}
+                teamname={teamName}
+                teamicon={teamIcon} />
+            })
           })
         }
         </div>
