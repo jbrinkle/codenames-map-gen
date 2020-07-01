@@ -3,6 +3,7 @@ import './App.css';
 import './components/MapGrid/MapGridCell/MapGridCell'
 import MapGrid from './components/MapGrid/MapGrid';
 import SetupPopup from './components/SetupPopup/SetupPopup';
+import { generateMap, serializeMapAndSettings, deserializeMapAndSettings } from './services/mapGeneration.service';
 
 class App extends React.Component {
 
@@ -10,23 +11,54 @@ class App extends React.Component {
     super(props);
     this.state = {
       showPopup: false,
-      mapData: []
+      setup: {},
+      board: {}
     };
+  }
+
+  componentDidMount() {
+    const encodedUriFragment = window.location.hash.slice(1);
+    if (!encodedUriFragment) { return }
+
+    const uriFrag = atob(decodeURIComponent(encodedUriFragment));
+    const map = deserializeMapAndSettings(uriFrag);
+
+    const { data, team } = map;
+    delete map.data;
+
+    this.setState({
+      setup: map,
+      board: {
+        data,
+        teamData: team
+      }
+    });
   }
 
   showPopup() {
     this.setState({
-      ...this.state,
       showPopup: true
     })
   }
 
-  setupPopupClosed(setupState) {
-    console.log(setupState);
+  setupPopupClosed(generationParams) {
+    if (!generationParams) { return; } // user cancelled
+
+    const map = generateMap(generationParams);
+    // update uri fragment with serialized map data
+    const serialized = serializeMapAndSettings(map);
+    const uriFrag = encodeURIComponent(btoa(serialized));
+    window.history.replaceState(null, 'Updated board', `#${uriFrag}`);
+
+    // update UX
     this.setState({
-      ...this.state,
-      showPopup: false
-    })
+      showPopup: false,
+      setup: generationParams,
+      board: {
+        data: map.data,
+        teamData: map.team
+      }
+    });
   }
 
   render() {
@@ -39,10 +71,11 @@ class App extends React.Component {
           </h1>
         </header>
         { this.state.showPopup && 
-          <SetupPopup onClose={this.setupPopupClosed.bind(this)} />
+          <SetupPopup init={this.state.setup} onClose={this.setupPopupClosed.bind(this)} />
         }
         <div className="mapgridHost">
-          <MapGrid data={this.state.mapData} />
+          {/* <MapGrid rowCount={this.state.board.boardHeight} data={this.state.board.data} firstTurn={this.state.board.firstTurn} /> */}
+          <MapGrid data={this.state.board.data} teamData={this.state.board.teamData} />
         </div>
         
         <div className="commands">
