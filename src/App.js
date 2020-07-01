@@ -3,7 +3,7 @@ import './App.css';
 import './components/MapGrid/MapGridCell/MapGridCell'
 import MapGrid from './components/MapGrid/MapGrid';
 import SetupPopup from './components/SetupPopup/SetupPopup';
-import { generateMap } from './services/mapGeneration.service';
+import { generateMap, serializeMapAndSettings, deserializeMapAndSettings } from './services/mapGeneration.service';
 
 class App extends React.Component {
 
@@ -24,8 +24,14 @@ class App extends React.Component {
 
   setupPopupClosed(generationParams) {
     if (!generationParams) { return; } // user cancelled
-    
+
     const map = generateMap(generationParams);
+    // update uri fragment with serialized map data
+    const serialized = serializeMapAndSettings(map);
+    const uriFrag = encodeURIComponent(btoa(serialized));
+    window.history.replaceState(null, 'Updated board', `#${uriFrag}`);
+
+    // update UX
     this.setState({
       showPopup: false,
       setup: generationParams,
