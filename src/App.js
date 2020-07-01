@@ -3,6 +3,7 @@ import './App.css';
 import './components/MapGrid/MapGridCell/MapGridCell'
 import MapGrid from './components/MapGrid/MapGrid';
 import SetupPopup from './components/SetupPopup/SetupPopup';
+import { generateMap } from './services/mapGeneration.service';
 
 class App extends React.Component {
 
@@ -10,23 +11,29 @@ class App extends React.Component {
     super(props);
     this.state = {
       showPopup: false,
-      mapData: []
+      setup: {},
+      board: {}
     };
   }
 
   showPopup() {
     this.setState({
-      ...this.state,
       showPopup: true
     })
   }
 
-  setupPopupClosed(setupState) {
-    console.log(setupState);
+  setupPopupClosed(generationParams) {
+    if (!generationParams) { return; } // user cancelled
+    
+    const map = generateMap(generationParams);
     this.setState({
-      ...this.state,
-      showPopup: false
-    })
+      showPopup: false,
+      setup: generationParams,
+      board: {
+        data: map.data,
+        teamData: map.team
+      }
+    });
   }
 
   render() {
@@ -42,7 +49,8 @@ class App extends React.Component {
           <SetupPopup onClose={this.setupPopupClosed.bind(this)} />
         }
         <div className="mapgridHost">
-          <MapGrid data={this.state.mapData} />
+          {/* <MapGrid rowCount={this.state.board.boardHeight} data={this.state.board.data} firstTurn={this.state.board.firstTurn} /> */}
+          <MapGrid data={this.state.board.data} teamData={this.state.board.teamData} />
         </div>
         
         <div className="commands">
