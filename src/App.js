@@ -16,6 +16,25 @@ class App extends React.Component {
     };
   }
 
+  componentDidMount() {
+    const encodedUriFragment = window.location.hash.slice(1);
+    if (!encodedUriFragment) { return }
+
+    const uriFrag = atob(decodeURIComponent(encodedUriFragment));
+    const map = deserializeMapAndSettings(uriFrag);
+
+    const { data, team } = map;
+    delete map.data;
+
+    this.setState({
+      setup: map,
+      board: {
+        data,
+        teamData: team
+      }
+    });
+  }
+
   showPopup() {
     this.setState({
       showPopup: true
