@@ -63,16 +63,6 @@ class SetupPopup extends React.Component {
     this.setState({ assassinsCount: newAssassinCount });
   }
 
-  updateUpperBounds(newState) {
-    const boardCellCount = this.state.dimensions.width * this.state.dimensions.height;
-    const minCodePieces = this.state.team.count === 1 ? 1 : 3;
-
-    newState.bystanders.upperBound = boardCellCount - minCodePieces - newState.assassin.count;
-    newState.assassin.upperBound = boardCellCount - minCodePieces - newState.bystanders.count;
-
-    this.setState(newState);
-  }
-
   closePopup(isCancel) {
     if (this.props.onClose) {
       this.props.onClose(isCancel ? null : this.state);
@@ -147,12 +137,12 @@ class SetupPopup extends React.Component {
             { this.state.team.count === 2 &&
               <React.Fragment>
               <tr>
-                <td><MapGridCell teamname={'team3'} cellLocation={teamIndicatorStyle}/></td>
+                <td><MapGridCell teamname={'teamBlu'} cellLocation={teamIndicatorStyle}/></td>
                 <td>Team 1 { this.state.team.first === 1 ? ' (first)' : '' }</td>
                 <td>{ team1count }</td>
               </tr>
               <tr>
-                <td><MapGridCell teamname={'team2'} cellLocation={teamIndicatorStyle}/></td>
+                <td><MapGridCell teamname={'teamRed'} cellLocation={teamIndicatorStyle}/></td>
                 <td>Team 2 { this.state.team.first === 2 ? ' (first)' : '' }</td>
                 <td>{ team2count }</td>
               </tr>
@@ -160,7 +150,7 @@ class SetupPopup extends React.Component {
             }
             { this.state.team.count === 1 &&
               <tr>
-                <td><MapGridCell teamname={'team1'} cellLocation={teamIndicatorStyle}/></td>
+                <td><MapGridCell teamname={'teamGrn'} cellLocation={teamIndicatorStyle}/></td>
                 <td>Team 1</td>
                 <td>{ team1count }</td>
               </tr>

@@ -35,17 +35,17 @@
     margin: 25%;
 }
 
-.team1 {
+.teamGrn {
     background-color: #494;
     border: 2px solid #686;
 }
 
-.team2 {
+.teamRed {
     background-color: #A44;
     border: 2px solid #B66;
 }
 
-.team3 {
+.teamBlu {
     background-color: #46F;
     border: 2px solid #46B
 }

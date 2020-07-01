@@ -13,9 +13,9 @@ class MapGrid extends React.Component {
     return {
       'assassin': 'assassin',
       'bystander': 'bystander',
-      'team1': 'triangle',
-      'team2': 'circle',
-      'team3': 'square'
+      'teamGrn': 'triangle',
+      'teamRed': 'circle',
+      'teamBlu': 'square'
     };
   }
 
@@ -28,9 +28,10 @@ class MapGrid extends React.Component {
       case 'b':
         return 'bystander';
       case '2':
-        return 'team2';
+        return (teamcount === 1) ? 'teamGrn' : 'teamRed';
+      case '1':
       default:
-        return (teamcount === 2) ? 'team3' : 'team1'
+        return (teamcount === 2) ? 'teamBlu' : 'teamGrn'
     }
   }
 
