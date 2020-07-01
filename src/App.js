@@ -71,7 +71,7 @@ class App extends React.Component {
           </h1>
         </header>
         { this.state.showPopup && 
-          <SetupPopup onClose={this.setupPopupClosed.bind(this)} />
+          <SetupPopup init={this.state.setup} onClose={this.setupPopupClosed.bind(this)} />
         }
         <div className="mapgridHost">
           {/* <MapGrid rowCount={this.state.board.boardHeight} data={this.state.board.data} firstTurn={this.state.board.firstTurn} /> */}

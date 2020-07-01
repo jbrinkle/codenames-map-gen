@@ -8,19 +8,27 @@ import MapGridCell from '../MapGrid/MapGridCell/MapGridCell';
 class SetupPopup extends React.Component {
   /*
     Props:
+    - init <object>: initial configuration data
     - onClose <func>: sends state when popup not cancelled
   */
-  state = {
-    team: {
-      count: 2,
-      first: 1
-    },
-    dimensions: {
-      width: 5,
-      height: 5
-    },
-    bystandersCount: 7,
-    assassinsCount: 1
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      team: {
+        count: 2,
+        first: 1
+      },
+      dimensions: {
+        width: 5,
+        height: 5
+      },
+      bystandersCount: 7,
+      assassinsCount: 1,
+
+      // merge any settings passed in
+      ...props.init
+    }
   }
 
   updateTeamCount(newTeamCount) {
@@ -66,7 +74,6 @@ class SetupPopup extends React.Component {
   }
 
   closePopup(isCancel) {
-    console.log(`Popup dialog closed, cancel=${isCancel}`);
     if (this.props.onClose) {
       this.props.onClose(isCancel ? null : this.state);
     }
